@@ -2,37 +2,43 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight
 } from 'react-native';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import { ActionCreators } from '../actions';
+import { ActionCreators } from '../actions';
 
 class AppContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {text: "yay!"}
+    }
+    changeText() {
+        this.props.addText('It works!!');
     }
     render() {
+        let text = this.props.text;
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
                     I am AppContainer!
-                    {this.state.text}
+                    {text}
                 </Text>
+                <TouchableHighlight onPress={() => { this.changeText() }}>
+                    <Text>Press here</Text>
+                </TouchableHighlight>
             </View>
         );
     }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({ text: state.text });
 
-const mapDispatchToProps = {
-    // login: UserActions.login,
-    // getRecipes: RecipeActions.getRecipes,
-    // getMeals: RecipeActions.getMeals,
-  };
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(ActionCreators, dispatch);
+}
 
-export default connect(mapStateToProps)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
 
 const styles = StyleSheet.create({
     container: {

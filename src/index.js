@@ -7,24 +7,23 @@ import React, { Component } from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import AppContainer from './containers/AppContainer';
-import {createLogger} from 'redux-logger';
+import {logger} from 'redux-logger';
+import reducers from './reducers';
 
-const loggerMiddleware = createLogger();
-
-let initialState = {
-    text: "Good evening"
+let preloadedState = {
+    text: 'Start'
 };
 
 function configureStore(initialState) {
     const enhancer = compose(
         applyMiddleware(
-            loggerMiddleware //put middleware here
+            logger //put middleware here
         )
     );
-    return createStore(rootReducer, initialState, enhancer);
+    return createStore(reducers, initialState, enhancer);
 };
 
-const store = configureStore();
+const store = configureStore(preloadedState);
 
 export default function App() {
     return (
