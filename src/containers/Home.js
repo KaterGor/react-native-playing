@@ -11,28 +11,31 @@ import {
     TouchableHighlight,
     StyleSheet
 } from 'react-native';
+import { List, ListItem } from 'react-native-elements'
 
 class Home extends Component {
     constructor(props) {
         super(props);
     }
-    
-    componentDidMount() {
-        // this.props.loadArticles();
-    }
 
-    loadLocations() {
+    componentDidMount() {
         this.props.getLocations();
     }
 
     render() {
         return (
-            <View style={{marginTop: 20}}>
-                <TouchableHighlight onPress={this.loadLocations()}>
-                    <Text>Load locations</Text>
-                </TouchableHighlight>
+            <View style={{ marginTop: 20 }}>
                 <ScrollView>
-                    <Text>Scroll View here</Text>
+                    <List containerStyle={{ marginBottom: 20 }}>
+                        {
+                            !!this.props.locations && this.props.locations.map((location, id) => (
+                                <ListItem
+                                    key={id}
+                                    title={location.name}
+                                />
+                            ))
+                        }
+                    </List>
                 </ScrollView>
             </View>
         );

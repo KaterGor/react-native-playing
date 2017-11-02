@@ -11,10 +11,6 @@ import {logger} from 'redux-logger';
 import thunkMiddleware from 'redux-thunk'
 import reducers from './reducers';
 
-let preloadedState = {
-    text: 'Start'
-};
-
 function configureStore(initialState) {
     const enhancer = compose(
         applyMiddleware(
@@ -25,7 +21,7 @@ function configureStore(initialState) {
     return createStore(reducers, initialState, enhancer);
 };
 
-const store = configureStore(preloadedState);
+const store = configureStore();
 
 export default function App() {
     return (
