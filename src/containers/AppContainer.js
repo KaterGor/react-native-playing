@@ -14,9 +14,7 @@ class AppContainer extends Component {
     constructor(props) {
         super(props);
     }
-    // changeText() {
-    //     this.props.addText('It works!!');
-    // }
+    
     render() {
         return <Home {...this.props} />   
     }

@@ -8,6 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import AppContainer from './containers/AppContainer';
 import {logger} from 'redux-logger';
+import thunkMiddleware from 'redux-thunk'
 import reducers from './reducers';
 
 let preloadedState = {
@@ -17,6 +18,7 @@ let preloadedState = {
 function configureStore(initialState) {
     const enhancer = compose(
         applyMiddleware(
+            thunkMiddleware,
             logger //put middleware here
         )
     );

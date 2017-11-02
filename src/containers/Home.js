@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as Locations from '../actions/locations';
 import {
     ScrollView,
     View,
@@ -20,14 +21,16 @@ class Home extends Component {
         // this.props.loadArticles();
     }
 
+    loadLocations() {
+        this.props.getLocations();
+    }
+
     render() {
         return (
             <View style={{marginTop: 20}}>
-                <View>
-                    <TextInput 
-                        placeholder="Enter search terms"
-                    />
-                </View>
+                <TouchableHighlight onPress={this.loadLocations()}>
+                    <Text>Load locations</Text>
+                </TouchableHighlight>
                 <ScrollView>
                     <Text>Scroll View here</Text>
                 </ScrollView>
@@ -38,8 +41,12 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        routes: state.routes
+        locations: state.locations
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = {
+    getLocations: Locations.getLocations
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
