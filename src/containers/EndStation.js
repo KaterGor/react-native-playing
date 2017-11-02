@@ -14,8 +14,7 @@ import {
 import { List, ListItem } from 'react-native-elements';
 import {Actions} from "react-native-router-flux";
 
-
-class Home extends Component {
+class EndStation extends Component {
     constructor(props) {
         super(props);
     }
@@ -24,21 +23,28 @@ class Home extends Component {
         this.props.getLocations();
     }
 
-    setStartStation(location) {
-        this.props.setStartStation(location);
-        Actions.endStation();
+    setEndStation(endStation) {
+        let startStation = this.props.startStation;
+        console.log(startStation, endStation);
+        this.props.getTransportationResults(startStation, endStation);
+        Actions.result();
     }
 
     render() {
         return (
             <View style={{ marginTop: 20 }}>
+                <View>
+                    <Text>
+                      Start station: {this.props.startStation.name}  
+                    </Text>
+                </View>
                 <ScrollView>
                     <List containerStyle={{ marginBottom: 20 }}>
                         {
                             !!this.props.locations && this.props.locations.map((location, id) => (
                                 <ListItem
                                     leftIcon={{name: 'directions'}}
-                                    onPress={() => this.setStartStation(location)}
+                                    onPress={() => this.setEndStation(location)}
                                     key={id}
                                     title={location.name}
                                 />
@@ -53,13 +59,15 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        locations: state.locations
+        locations: state.locations,
+        startStation: state.startStation
     }
 }
 
 const mapDispatchToProps = {
     getLocations: Locations.getLocations,
-    setStartStation: Locations.setStartStation
+    setEndStation: Locations.setEndStation,
+    getTransportationResults: Locations.getTransportationResults
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(EndStation);

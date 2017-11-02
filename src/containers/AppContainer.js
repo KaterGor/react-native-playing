@@ -9,6 +9,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import Home from './Home';
+import {
+    Scene,
+    Router,
+    Actions,
+    Reducer,
+    ActionConst,
+    Overlay,
+    Tabs,
+    Modal,
+    Drawer,
+    Stack,
+    Lightbox,
+  } from 'react-native-router-flux';
 
 class AppContainer extends Component {
     constructor(props) {
