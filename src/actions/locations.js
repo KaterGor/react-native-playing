@@ -17,3 +17,10 @@ export function setLocations({locations}) {
         locations
     }
 }
+
+export function setStartStation(startStation) {
+    return {
+        type: types.SET_START_STATION,
+        startStation: startStation
+    }
+}

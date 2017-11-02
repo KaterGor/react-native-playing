@@ -1,1 +1,2 @@
 export const SET_LOCATIONS = 'SET_LOCATIONS';
+export const SET_START_STATION = 'SET_START_STATION';

@@ -22,6 +22,10 @@ class Home extends Component {
         this.props.getLocations();
     }
 
+    setStartStation(location) {
+        this.props.setStartStation(location);
+    }
+
     render() {
         return (
             <View style={{ marginTop: 20 }}>
@@ -30,6 +34,7 @@ class Home extends Component {
                         {
                             !!this.props.locations && this.props.locations.map((location, id) => (
                                 <ListItem
+                                onPress={() => this.setStartStation(location)}
                                     key={id}
                                     title={location.name}
                                 />
@@ -49,7 +54,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    getLocations: Locations.getLocations
+    getLocations: Locations.getLocations,
+    setStartStation: Locations.setStartStation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
